@@ -7,7 +7,7 @@ MAINTAINER marcus@abstractfactory.io
 RUN wget http://download.autodesk.com/us/support/files/maya_2015_service_pack_5/Autodesk_Maya_2015_SP5_English_Linux.tgz -O maya.tgz && \
     mkdir /maya && tar -xvf maya.tgz -C /maya && \
     rm maya.tgz
- 
+
 WORKDIR /maya
  
 # Install Maya
@@ -16,6 +16,10 @@ RUN rpm -Uvh *.rpm
 # Setup environment
 ENV MAYA_LOCATION=/usr/autodesk/maya2015-x64/
 ENV PATH=$MAYA_LOCATION/bin:$PATH
+
+RUN wget https://bootstrap.pypa.io/get-pip.py && \
+    mayapy get-pip.py && \
+    alias pip="mayapy -m pip"
  
 # Cleanup
 WORKDIR /root
