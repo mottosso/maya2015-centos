@@ -20,7 +20,10 @@ ENV PATH=$MAYA_LOCATION/bin:$PATH
 RUN wget https://bootstrap.pypa.io/get-pip.py && \
     mayapy get-pip.py && \
     alias pip="mayapy -m pip"
- 
+
+RUN pip install \
+ nose
+
 # Cleanup
 WORKDIR /root
 RUN rm -r /maya
